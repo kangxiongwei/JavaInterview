@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<people id="A01">
+    <person personId="E01">
+        <name>zhangsan</name>
+        <address>Yunnan,China</address>
+        <email>zhangsan@139.com</email>
+    </person>
+    <person personId="E02">
+        <name>lisi</name>
+        <address>Fujian,China</address>
+        <email>lisi@139.com</email>
+    </person>
+    <person personId="E03">
+        <name>wangwu</name>
+        <address>Hunan,China</address>
+        <email>wangwu@139.com</email>
+    </person>
+    <person personId="E04">
+        <name>zhuliu</name>
+        <address>Liaoning,China</address>
+        <email>zhuliu@139.com</email>
+    </person>
+    <person personId="E05">
+        <name>zhuoqi</name>
+        <address>Shannxi,China</address>
+        <email>zhuoqi@163.com</email>
+    </person>
+</people>
