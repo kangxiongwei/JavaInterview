@@ -15,3 +15,15 @@
 ## 4.原型模式
 
 包名prototype
+
+## 5.工厂模式
+
+包名factory
+
+## 6.单例模式
+
+包名singleton
+
+## 7.装饰者模式
+
+包名decorator
