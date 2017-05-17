@@ -4,11 +4,11 @@ package com.kxw.pattern.strategy;
  * Created by kangxiongwei on 2015/7/5.
  * 策略的使用环境
  */
-public class Environment implements Strategy{
+public class Environment implements Strategy {
 
     private Strategy strategy;
 
-    public Environment(Strategy strategy){
+    public Environment(Strategy strategy) {
         this.strategy = strategy;
     }
 
@@ -22,6 +22,6 @@ public class Environment implements Strategy{
 
     @Override
     public int calculate(int a, int b) {
-        return this.strategy.calculate(a,b);
+        return this.strategy.calculate(a, b);
     }
 }
