@@ -14,7 +14,7 @@ public class ConcurrentMapTest {
         ConcurrentMap<String,String> map = new ConcurrentHashMap<String, String>();
 
 
-        Hashtable
+        Hashtable hashtable = new Hashtable();
 
 
     }
