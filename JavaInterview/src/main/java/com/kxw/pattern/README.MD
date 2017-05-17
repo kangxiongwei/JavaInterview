@@ -27,3 +27,12 @@
 ## 7.装饰者模式
 
 包名decorator
+
+## 8.享元模式
+
+包名flyweight
+
+## 9.责任链模式
+
+chain of resposibility
+包名cor
