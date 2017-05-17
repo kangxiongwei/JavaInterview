@@ -1,5 +1,7 @@
 package com.kxw.designpattern.poxy;
 
+import com.kxw.designpattern.poxy.cglib.CglibProxy;
+import com.kxw.designpattern.poxy.cglib.CglibTarget;
 import com.kxw.designpattern.poxy.dynamic.DynamicProxy;
 import com.kxw.designpattern.poxy.statics.StaticsProxy;
 
@@ -15,13 +17,22 @@ public class Client {
         String command = "hello proxy";
 
         //静态代理
+        System.out.println("-------静态代理---------");
         StaticsProxy staticsProxy = new StaticsProxy(target);
         staticsProxy.execute(command);
 
         //基于JDK的动态代理
+        System.out.println("------JDK动态代理--------");
         DynamicProxy proxy = new DynamicProxy(target);
         Action targetProxy = (Action) proxy.getProxy();
         targetProxy.execute(command);
+
+        //基于CGLIB的动态代理
+        System.out.println("--------CGLIB动态代理-----------");
+        CglibProxy cglibProxy = new CglibProxy(new CglibTarget());
+        CglibTarget cglibTarget = (CglibTarget) cglibProxy.getProxy();
+        cglibTarget.execute(command);
+
     }
 
 
