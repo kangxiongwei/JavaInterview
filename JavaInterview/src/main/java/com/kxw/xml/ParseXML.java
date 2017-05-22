@@ -13,12 +13,11 @@ import java.io.File;
  */
 public class ParseXML {
 
-    public static void main(String[] args) throws Exception{
-
-        String path = ParseXML.class.getResource("").getPath();
+    public static void main(String[] args) throws Exception {
+        String path = ParseXML.class.getClassLoader().getResource("").getPath();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(new File(path+"/canlidate.xml"));
+        Document document = builder.parse(new File(path + "/canlidate.xml"));
 
         Element root = document.getDocumentElement();
         parseXML(root);
@@ -26,15 +25,16 @@ public class ParseXML {
 
     /**
      * 递归遍历xml，将解析结果打印
+     *
      * @param element
      */
     public static void parseXML(Element element) {
         //先打印标签
-        System.out.print("<"+element.getTagName());
+        System.out.print("<" + element.getTagName());
         //解析属性
         NamedNodeMap map = element.getAttributes();
-        if(map != null) {
-            for(int i=0; i<map.getLength(); i++){
+        if (map != null) {
+            for (int i = 0; i < map.getLength(); i++) {
                 Node node = map.item(i);
                 System.out.print(" " + node.getNodeName() + "=\"" + node.getNodeValue() + "\"");
             }
@@ -42,16 +42,16 @@ public class ParseXML {
         System.out.print(">");
         //解析子节点
         NodeList nodeList = element.getChildNodes();
-        for (int i=0; i<nodeList.getLength(); i++) {
+        for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
-            if(Element.ELEMENT_NODE == node.getNodeType()) {
-                parseXML((Element)node);
+            if (Element.ELEMENT_NODE == node.getNodeType()) {
+                parseXML((Element) node);
             } else {
                 //内容
                 System.out.print(node.getNodeValue());
             }
         }
-        System.out.print("</"+element.getNodeName()+">");
+        System.out.print("</" + element.getNodeName() + ">");
     }
 
 

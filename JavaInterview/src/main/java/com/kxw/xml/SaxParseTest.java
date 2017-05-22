@@ -13,14 +13,14 @@ import java.io.File;
  */
 public class SaxParseTest {
 
-    public static void main(String[] args) throws Exception{
-        String path = SaxParseTest.class.getResource("").getPath();
+    public static void main(String[] args) throws Exception {
+        String path = SaxParseTest.class.getClassLoader().getResource("").getPath();
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser parser = factory.newSAXParser();
-        parser.parse(new File(path+"/canlidate.xml"),new MySAXHandler());
+        parser.parse(new File(path + "/canlidate.xml"), new MySAXHandler());
     }
 
-    private static class MySAXHandler extends DefaultHandler{
+    private static class MySAXHandler extends DefaultHandler {
 
         @Override
         public void startDocument() throws SAXException {
@@ -29,18 +29,18 @@ public class SaxParseTest {
 
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-            System.out.println("Start Element name: "+qName);
+            System.out.println("Start Element name: " + qName);
         }
 
         @Override
         public void characters(char[] ch, int start, int length) throws SAXException {
-            String content = new String(ch,start,length);
-            System.out.println("Element content: "+content);
+            String content = new String(ch, start, length);
+            System.out.println("Element content: " + content);
         }
 
         @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
-            System.out.println("End Element name: "+qName);
+            System.out.println("End Element name: " + qName);
         }
 
         @Override

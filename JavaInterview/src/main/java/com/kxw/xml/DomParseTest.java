@@ -14,17 +14,17 @@ import java.io.File;
 public class DomParseTest {
 
     public static void main(String[] args) throws Exception {
-        String path = DomParseTest.class.getResource("").getPath();
+        String path = DomParseTest.class.getClassLoader().getResource("").getPath();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(new File(path+"/canlidate.xml"));
+        Document document = builder.parse(new File(path + "/canlidate.xml"));
         NodeList list = document.getElementsByTagName("person");
-        for (int i=0; i<list.getLength(); i++) {
-            Element element = (Element)list.item(i);
+        for (int i = 0; i < list.getLength(); i++) {
+            Element element = (Element) list.item(i);
             String name = element.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
             String address = element.getElementsByTagName("address").item(0).getFirstChild().getNodeValue();
             String email = element.getElementsByTagName("email").item(0).getFirstChild().getNodeValue();
-            System.out.println("person:["+name+","+address+","+email+"]");
+            System.out.println("person:[" + name + "," + address + "," + email + "]");
         }
     }
 
