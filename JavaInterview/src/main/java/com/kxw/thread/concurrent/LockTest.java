@@ -19,7 +19,7 @@ public class LockTest {
 class Bank {
 
     private int money = 1000;
-    Lock lock = new ReentrantLock();
+    Lock lock = new ReentrantLock(true);
 
     /**
      * 取钱
