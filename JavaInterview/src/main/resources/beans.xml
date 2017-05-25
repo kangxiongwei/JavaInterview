@@ -10,5 +10,30 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.kxw.spring"/>
 
+    <bean id="test" name="hello,test2" class="com.kxw.spring.ioc.SpringSourceTest">
+
+    </bean>
+
+
+    <bean id="proxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--目标对象-->
+        <property name="target" ref="springAopTarget"/>
+        <!--目标对象的接口-->
+        <property name="proxyInterfaces">
+            <list>
+                <value>com.kxw.spring.aop.SpringAopInter</value>
+            </list>
+        </property>
+        <!--通知-->
+        <property name="interceptorNames">
+            <list>
+                <value>countingBeforeAdvice</value>
+                <value>countingAfterReturningAdvice</value>
+            </list>
+        </property>
+    </bean>
+
+
+
 
 </beans>

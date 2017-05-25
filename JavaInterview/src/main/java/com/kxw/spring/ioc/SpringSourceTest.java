@@ -1,4 +1,4 @@
-package com.kxw.spring;
+package com.kxw.spring.ioc;
 
 import org.junit.Assert;
 import org.junit.Test;
