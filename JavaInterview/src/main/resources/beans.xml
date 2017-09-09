@@ -10,11 +10,6 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.kxw.spring"/>
 
-    <bean id="test" name="hello,test2" class="com.kxw.spring.ioc.SpringSourceTest">
-
-    </bean>
-
-
     <bean id="proxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
         <!--目标对象-->
         <property name="target" ref="springAopTarget"/>
@@ -33,7 +28,19 @@
         </property>
     </bean>
 
+    <bean id="person" class="com.kxw.spring.ioc.Person">
+        <property name="name" value="zhangsan"/>
+        <property name="age" value="14"/>
+    </bean>
+    <bean id="animal" class="com.kxw.spring.ioc.Animal">
+        <property name="name" value="xiaowang"/>
+        <property name="src" value="shanxi"/>
+    </bean>
 
+    <bean id="world" class="com.kxw.spring.ioc.World" depends-on="person, animal">
+        <property name="person" ref="person"/>
+        <property name="animal" ref="animal"/>
+    </bean>
 
 
 </beans>

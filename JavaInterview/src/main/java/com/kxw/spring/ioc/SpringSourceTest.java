@@ -2,6 +2,7 @@ package com.kxw.spring.ioc;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.parsing.SourceExtractor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -17,7 +18,6 @@ import java.net.URL;
  */
 @Component
 public class SpringSourceTest {
-
     private static final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
     /**
@@ -36,23 +36,11 @@ public class SpringSourceTest {
         //将resource的内容载入到内存，变成对象
         reader.loadBeanDefinitions(resource);
 
-        SpringSourceTest test = (SpringSourceTest) factory.getBean("springSourceTest");
-        System.out.println(test);
+        World world = factory.getBean("world", World.class);
+        System.out.println(world);
 
-        SpringSourceTest test1 = (SpringSourceTest) factory.getBean("springSourceTest");
-        System.out.println(test1);
-    }
-
-    /**
-     *
-     */
-    @Test
-    public void testFileSystemXmlApplicationContext() {
-        URL url = SpringSourceTest.class.getClassLoader().getResource("");
-        Assert.assertNotNull(url);
-        String path = url.getPath();
-        FileSystemXmlApplicationContext context = new FileSystemXmlApplicationContext(path + "/beans.xml");
-
+        World worldCache = factory.getBean("world", World.class);
+        System.out.println(worldCache);
     }
 
 }
