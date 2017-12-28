@@ -32,7 +32,7 @@
         <property name="name" value="zhangsan"/>
         <property name="age" value="14"/>
     </bean>
-    <bean id="animal" class="com.kxw.spring.ioc.Animal">
+    <bean id="animal" name="animal2, animal3, animal4" class="com.kxw.spring.ioc.Animal">
         <property name="name" value="xiaowang"/>
         <property name="src" value="shanxi"/>
     </bean>
@@ -42,5 +42,9 @@
         <property name="animal" ref="animal"/>
     </bean>
 
+
+    <beans>
+        <bean id="xxx" class="com.kxw.reflect.Person"/>
+    </beans>
 
 </beans>

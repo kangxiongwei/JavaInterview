@@ -11,7 +11,7 @@
 
     <properties>
         <!--Spring版本-->
-        <spring.version>4.3.8.RELEASE</spring.version>
+        <spring.version>5.0.2.RELEASE</spring.version>
     </properties>
 
     <dependencies>
@@ -74,6 +74,11 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
 
     </dependencies>
 
