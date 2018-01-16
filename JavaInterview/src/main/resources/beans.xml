@@ -1,50 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <context:annotation-config/>
-    <context:component-scan base-package="com.kxw.spring"/>
-
-    <bean id="proxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
-        <!--目标对象-->
-        <property name="target" ref="springAopTarget"/>
-        <!--目标对象的接口-->
-        <property name="proxyInterfaces">
-            <list>
-                <value>com.kxw.spring.aop.SpringAopInter</value>
-            </list>
-        </property>
-        <!--通知-->
-        <property name="interceptorNames">
-            <list>
-                <value>countingBeforeAdvice</value>
-                <value>countingAfterReturningAdvice</value>
-            </list>
-        </property>
-    </bean>
-
+    <!--基本类型注入-->
     <bean id="person" class="com.kxw.spring.ioc.Person">
         <property name="name" value="zhangsan"/>
         <property name="age" value="14"/>
     </bean>
+
     <bean id="animal" name="animal2, animal3, animal4" class="com.kxw.spring.ioc.Animal">
         <property name="name" value="xiaowang"/>
         <property name="src" value="shanxi"/>
     </bean>
 
-    <bean id="world" class="com.kxw.spring.ioc.World" depends-on="person, animal">
+    <!--依赖注入-->
+    <bean id="world" class="com.kxw.spring.ioc.World" depends-on="person,animal">
+        <constructor-arg name="animal" ref="animal"/>
+        <constructor-arg name="person" ref="person"/>
+        <property name="name" value="world"/>
+    </bean>
+    <bean id="world2" class="com.kxw.spring.ioc.World">
+        <property name="animal">
+            <bean class="com.kxw.spring.ioc.Animal">
+                <property name="name" value="beanPropName"/>
+                <property name="src" value="beijing"/>
+            </bean>
+        </property>
         <property name="person" ref="person"/>
-        <property name="animal" ref="animal"/>
+        <property name="name" value="world2"/>
     </bean>
 
+    <!--别名标签-->
+    <alias name="person" alias="person7"/>
 
-    <beans>
-        <bean id="xxx" class="com.kxw.reflect.Person"/>
-    </beans>
+    <!--parent和name的作用-->
+    <bean id="person2" name="person3,person4;person5 person6" parent="person">
+        <property name="name" value="zhangsan2"/>
+    </bean>
+
+    <!--bean的id属性名称-->
+    <bean class="com.kxw.spring.ioc.Person">
+        <property name="name" value="id1"/>
+        <property name="age" value="14"/>
+    </bean>
+    <bean class="com.kxw.spring.ioc.Person">
+        <property name="name" value="id2"/>
+        <property name="age" value="14"/>
+    </bean>
+
+    <!--bean的子元素lookup-method和replace-method的作用-->
+    <bean id="player" class="com.kxw.spring.ioc.subele.Player"/>
+    <bean id="kobe" class="com.kxw.spring.ioc.subele.Kobe"/>
+    <bean id="yao" class="com.kxw.spring.ioc.subele.Yao"/>
+
+    <bean id="getBean" class="com.kxw.spring.ioc.subele.GetBean">
+        <lookup-method bean="kobe" name="getBean"/>
+    </bean>
+    <bean id="getBean2" class="com.kxw.spring.ioc.subele.Kobe">
+        <replaced-method name="who" replacer="yao"/>
+    </bean>
 
 </beans>

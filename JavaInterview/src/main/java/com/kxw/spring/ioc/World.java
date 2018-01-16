@@ -5,8 +5,25 @@ package com.kxw.spring.ioc;
  */
 public class World {
 
+    private String name;
     private Person person;
     private Animal animal;
+
+    public World() {
+    }
+
+    public World(Person person, Animal animal) {
+        this.person = person;
+        this.animal = animal;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Person getPerson() {
         return person;
@@ -27,7 +44,8 @@ public class World {
     @Override
     public String toString() {
         return "World{" +
-                "person=" + person +
+                "name='" + name + '\'' +
+                ", person=" + person +
                 ", animal=" + animal +
                 '}';
     }
