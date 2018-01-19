@@ -14,13 +14,14 @@
     <bean id="afterAdvice" class="com.kxw.spring.aop.CountingAfterReturningAdvice"/>
     <bean id="throwsAdvice" class="com.kxw.spring.aop.CountingThrowsAdvice"/>
     <bean id="aroundAdvice" class="com.kxw.spring.aop.CountingAroundAdvice"/>
+    <bean id="introductionAdvice" class="com.kxw.spring.aop.CountingIntroductionAdviceImpl"/>
 
     <!--用aop的schema配置-->
     <aop:config>
         <aop:pointcut id="hello" expression="execution(* com.kxw.spring.aop.SpringAopTarget.helloAop(..))"/>
         <!--Advisor是一种特殊的Aspect，只能有一个切点和一个通知-->
-        <aop:advisor advice-ref="afterAdvice" pointcut-ref="hello"/>
-        <aop:advisor advice-ref="beforeAdvice" pointcut-ref="hello"/>
+        <!--<aop:advisor advice-ref="afterAdvice" pointcut-ref="hello"/>
+        <aop:advisor advice-ref="beforeAdvice" pointcut-ref="hello"/>-->
         <!--给SpringAopInter增加引入切面-->
         <!--types-matching是之前原始的类，implement-interface是想要添加的功能的接口，default-impl是新功能的默认的实现，+号表示该类型或者其子类都可以增强-->
         <aop:aspect id="introductionAspect">
@@ -29,12 +30,12 @@
                                  default-impl="com.kxw.spring.aop.CountingIntroductionAdviceImpl"/>
         </aop:aspect>
         <!--定义一个切面-->
-        <aop:aspect id="target" ref="xmlAdvice">
+        <!--<aop:aspect id="target" ref="xmlAdvice">
             <aop:pointcut id="pointcut" expression="execution(* com.kxw.spring.aop.SpringAopTarget.testAop(..))"/>
             <aop:before method="doBefore" pointcut-ref="pointcut"/>
             <aop:after method="doAfter" pointcut-ref="pointcut"/>
             <aop:around method="doAround" pointcut-ref="pointcut"/>
-        </aop:aspect>
+        </aop:aspect>-->
     </aop:config>
 
     <!--完全用xml配置-->

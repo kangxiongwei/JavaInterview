@@ -10,6 +10,7 @@
 
 案例：
 
+```markdown
 @Override
 public void writeExternal(ObjectOutput out) throws IOException {
     out.writeObject(name);
@@ -21,3 +22,4 @@ public void readExternal(ObjectInput in) throws IOException, ClassNotFoundExcept
     name = (String) in.readObject();
     age = in.readInt();
 }
+```
