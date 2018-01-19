@@ -7,12 +7,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class SpringAopClient {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         SpringAopInter aop = context.getBean("proxyFactoryBean", SpringAopInter.class);
         aop.testAop();
     }
-
 
 
 }

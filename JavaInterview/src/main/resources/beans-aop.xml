@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <bean id="springAopTarget" class="com.kxw.spring.aop.SpringAopTarget"/>
+    <bean id="xmlAdvice" class="com.kxw.spring.aop.SpringXmlAdvice"/>
 
+    <bean id="beforeAdvice" class="com.kxw.spring.aop.CountingBeforeAdvice"/>
+    <bean id="afterAdvice" class="com.kxw.spring.aop.CountingAfterReturningAdvice"/>
+    <bean id="throwsAdvice" class="com.kxw.spring.aop.CountingThrowsAdvice"/>
+    <bean id="aroundAdvice" class="com.kxw.spring.aop.CountingAroundAdvice"/>
+
+    <!--用aop的schema配置-->
+    <aop:config>
+        <aop:pointcut id="hello" expression="execution(* com.kxw.spring.aop.SpringAopTarget.helloAop(..))"/>
+        <!--Advisor是一种特殊的Aspect，只能有一个切点和一个通知-->
+        <aop:advisor advice-ref="afterAdvice" pointcut-ref="hello"/>
+        <aop:advisor advice-ref="beforeAdvice" pointcut-ref="hello"/>
+        <!--给SpringAopInter增加引入切面-->
+        <!--types-matching是之前原始的类，implement-interface是想要添加的功能的接口，default-impl是新功能的默认的实现，+号表示该类型或者其子类都可以增强-->
+        <aop:aspect id="introductionAspect">
+            <aop:declare-parents types-matching="com.kxw.spring.aop.SpringAopInter+"
+                                 implement-interface="com.kxw.spring.aop.CountingIntroductionAdvice"
+                                 default-impl="com.kxw.spring.aop.CountingIntroductionAdviceImpl"/>
+        </aop:aspect>
+        <!--定义一个切面-->
+        <aop:aspect id="target" ref="xmlAdvice">
+            <aop:pointcut id="pointcut" expression="execution(* com.kxw.spring.aop.SpringAopTarget.testAop(..))"/>
+            <aop:before method="doBefore" pointcut-ref="pointcut"/>
+            <aop:after method="doAfter" pointcut-ref="pointcut"/>
+            <aop:around method="doAround" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!--完全用xml配置-->
     <bean id="proxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--是否单例-->
+        <!--<property name="singleton" value="false"/>-->
         <!--目标对象-->
         <property name="target" ref="springAopTarget"/>
         <!--目标对象的接口-->
@@ -18,15 +52,12 @@
         <!--通知-->
         <property name="interceptorNames">
             <list>
-                <value>countingBeforeAdvice</value>
-                <value>countingAfterReturningAdvice</value>
+                <!--<value>beforeAdvice</value>
+                <value>afterAdvice</value>
+                <value>throwsAdvice</value>-->
+                <value>aroundAdvice</value>
             </list>
         </property>
-    </bean>
-
-    <bean id="person" class="com.kxw.spring.ioc.Person">
-        <property name="name" value="xxx"/>
-        <property name="age" value="13"/>
     </bean>
 
 </beans>

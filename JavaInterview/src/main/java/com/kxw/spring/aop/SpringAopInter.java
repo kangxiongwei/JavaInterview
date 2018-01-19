@@ -5,6 +5,7 @@ package com.kxw.spring.aop;
  */
 public interface SpringAopInter {
 
-    void testAop();
+    void testAop() throws Exception;
 
+    String helloAop(String name);
 }

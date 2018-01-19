@@ -3,20 +3,17 @@ package com.kxw.spring.ioc;
 import com.kxw.spring.ioc.subele.GetBean;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.lang.reflect.Constructor;
 
 /**
  * Create by kangxiongwei on 2018/1/15 10:17.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/beans.xml")
 public class SpringIocTest {
 
     private ApplicationContext context;
@@ -42,6 +39,19 @@ public class SpringIocTest {
 
         //实例化bean
         factory.getBean("world2");
+    }
+
+    @Test
+    public void testConstructorIoC() {
+        try {
+            Constructor ctor = World.class.getDeclaredConstructor(Person.class, Animal.class);
+            Person person = new Person();
+            person.setName("ctorPerson");
+            Object obj = ctor.newInstance(person, new Animal());
+            System.out.println(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

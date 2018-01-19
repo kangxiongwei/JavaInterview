@@ -17,19 +17,24 @@
 
     <!--依赖注入-->
     <bean id="world" class="com.kxw.spring.ioc.World" depends-on="person,animal">
+        <constructor-arg index="0" name="person" ref="person"/>
         <constructor-arg name="animal" ref="animal"/>
-        <constructor-arg name="person" ref="person"/>
         <property name="name" value="world"/>
+        <property name="person.age" value="15"/>
     </bean>
-    <bean id="world2" class="com.kxw.spring.ioc.World">
-        <property name="animal">
-            <bean class="com.kxw.spring.ioc.Animal">
-                <property name="name" value="beanPropName"/>
-                <property name="src" value="beijing"/>
-            </bean>
-        </property>
+
+    <bean id="world2" class="com.kxw.spring.ioc.World" autowire="byType">
+        <property name="animal" ref="animal"/>
         <property name="person" ref="person"/>
-        <property name="name" value="world2"/>
+        <property name="name">
+            <idref bean="animal"/>
+        </property>
+        <property name="persons">
+            <list>
+                <ref bean="person"/>
+                <ref bean="person2"/>
+            </list>
+        </property>
     </bean>
 
     <!--别名标签-->
