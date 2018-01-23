@@ -6,18 +6,20 @@ package com.kxw.statics;
  */
 public class StaticOrder {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new Child();
         //结果为：
         /*This is parent static block
         This is child static block
+        This is parent anonymous constructor
         This is parent constructor
+        This is child anonymous constructor
         This is child constructor*/
     }
 
 }
 
-class Parent{
+class Parent {
 
     static String parentName = "parent";
 
@@ -25,11 +27,16 @@ class Parent{
         System.out.println("This is parent static block");
     }
 
-    public Parent(){
+    public Parent() {
         System.out.println("This is parent constructor");
     }
+
+    {
+        System.out.println("This is parent anonymous constructor");
+    }
 }
-class Child extends Parent{
+
+class Child extends Parent {
 
     static String childName = "child";
 
@@ -37,7 +44,15 @@ class Child extends Parent{
         System.out.println("This is child static block");
     }
 
-    public Child(){
+    public Child() {
         System.out.println("This is child constructor");
+    }
+
+    {
+        System.out.println("This is child anonymous constructor");
+    }
+
+    public static void test() {
+        System.out.println("This is test");
     }
 }
