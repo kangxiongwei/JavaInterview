@@ -15,10 +15,10 @@ public class Client {
         long start = System.currentTimeMillis();
         // 打开socket的nio管道
         SocketChannel sc = SocketChannel.open();
-        sc.connect(new InetSocketAddress("localhost", 9888));// 绑定相应的ip和端口
+        sc.connect(new InetSocketAddress("localhost", 10000));// 绑定相应的ip和端口
         sc.configureBlocking(true);// 设置阻塞
         // 将文件放到channel中
-        FileChannel fc = new FileInputStream("E:/HelloWorld.java").getChannel();// 打开文件管道
+        FileChannel fc = new FileInputStream("/Users/kangxiongwei/my.cnf").getChannel();// 打开文件管道
         //做好标记量
         long size = fc.size();
         int pos = 0;

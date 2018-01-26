@@ -1,5 +1,6 @@
 package com.kxw.spring.ioc;
 
+import com.kxw.spring.ioc.lifecycle.PostProcessor;
 import com.kxw.spring.ioc.subele.GetBean;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +39,7 @@ public class SpringIocTest {
         reader.loadBeanDefinitions(resource);
 
         //实例化bean
-        factory.getBean("world2");
+        factory.getBean("person");
     }
 
     @Test
@@ -117,6 +118,15 @@ public class SpringIocTest {
 
         Object obj4 = context.getBean("person6");
         System.out.println(obj4.toString());
+    }
+
+    /**
+     * 测试bean的PostProcessor
+     */
+    @Test
+    public void testPostProcessor() {
+        PostProcessor pp = (PostProcessor) context.getBean("processor");
+        System.out.println(pp);
     }
 
 
