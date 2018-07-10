@@ -6,12 +6,12 @@ package com.kxw.pattern.observer;
  */
 public interface AbstractWatched {
 
-    public void registerWatcher(AbstractWatcher watcher);
+    void registerWatcher(AbstractWatcher watcher);
 
-    public void removeWatcher(AbstractWatcher watcher);
+    void removeWatcher(AbstractWatcher watcher);
 
-    public void removeAllWatcher();
+    void removeAllWatcher();
 
-    public void changeStatus();
+    void changeStatus();
 
 }

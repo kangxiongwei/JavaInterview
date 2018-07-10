@@ -6,6 +6,6 @@ package com.kxw.pattern.observer;
  */
 public interface AbstractWatcher {
 
-    public void update();
+    void update();
 
 }

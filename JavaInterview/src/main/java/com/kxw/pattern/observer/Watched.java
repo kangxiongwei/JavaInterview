@@ -10,7 +10,6 @@ public class Watched implements AbstractWatched {
 
     private List<AbstractWatcher> watcherList = new ArrayList<AbstractWatcher>();
 
-
     @Override
     public void registerWatcher(AbstractWatcher watcher) {
         this.watcherList.add(watcher);

@@ -34,5 +34,5 @@
 
 ## 9.责任链模式
 
-chain of resposibility
+chain of responsibility
 包名cor

@@ -10,7 +10,7 @@ import java.util.List;
 public class IteratorClient {
 
     public static void main(String[] args) {
-        List list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add("a");
         list.add("b");
         list.add("c");

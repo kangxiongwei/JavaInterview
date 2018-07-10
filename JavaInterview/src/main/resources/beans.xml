@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName" default-lazy-init="true" default-destroy-method="setAge">
 
     <!--基本类型注入-->
     <bean id="person" class="com.kxw.spring.ioc.Person">
@@ -10,8 +11,8 @@
         <property name="age" value="14"/>
     </bean>
 
-    <bean id="personCtor" class="com.kxw.spring.ioc.Person">
-        <constructor-arg name="name" value="ctor"/>
+    <bean id="personCtor" class="com.kxw.spring.ioc.Person" lazy-init="true">
+        <constructor-arg index="0" name="name" value="ctor"/>
         <constructor-arg name="age" value="15"/>
     </bean>
 
@@ -73,5 +74,4 @@
     </bean>
 
     <bean id="processor" class="com.kxw.spring.ioc.lifecycle.PostProcessor"/>
-
 </beans>

@@ -10,7 +10,7 @@ public class MyObserver2 implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if((Integer)arg == 0) {
+        if ((Integer) arg == 0) {
             System.out.println("finished");
         }
     }
