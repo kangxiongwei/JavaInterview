@@ -33,4 +33,26 @@ public class ConcreteAggregate implements Aggregate {
     public int getSize() {
         return list.size();
     }
+
+
+    private static class ArrayIterator implements Iterator {
+
+        private List list;
+        private Integer index = 0;
+
+        ArrayIterator(List list) {
+            this.list = list;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return list.size() > index;
+        }
+
+        @Override
+        public Object next() {
+            return hasNext() ? list.get(index++) : null;
+        }
+    }
+
 }

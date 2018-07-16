@@ -1,6 +1,6 @@
 package com.kxw.pattern.iterator;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,11 +10,7 @@ import java.util.List;
 public class IteratorClient {
 
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        list.add("a");
-        list.add("b");
-        list.add("c");
-        list.add("d");
+        List<String> list = Arrays.asList("a", "b", "c", "d");
         Aggregate aggregate = new ConcreteAggregate(list);
         Iterator it = aggregate.iterator();
         while (it.hasNext()) {
